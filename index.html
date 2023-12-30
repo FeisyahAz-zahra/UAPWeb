@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UAP WEB</title>
+  </head>
+  <body>
+    <h1>Data Barang</h1>
+
+    <table border="2" id="tabelBarang">
+      <tr>
+        <th>Kode</th>
+        <th>Barang</th>
+        <th>Harga</th>
+      </tr>
+    </table>
+
+    <div>
+      <h2>Inputan User</h2>
+      <table border="2">
+        <tr>
+          <th>Masukkan Kode</th>
+          <td>:</td>
+          <td><input type="text" id="input-kode" /></td>
+        </tr>
+        <tr>
+          <th>Banyaknya Barang</th>
+          <td>:</td>
+          <td><input type="text" id="input-jumlah" /></td>
+        </tr>
+        <tr>
+          <th><button type="submit" onclick="transaksi()">Submit</button></th>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      const data = [
+        { kode: "001", nama_barang: "A", harga: 10000 },
+        { kode: "002", nama_barang: "B", harga: 20000 },
+        { kode: "003", nama_barang: "C", harga: 30000 },
+      ];
+
+      function showData() {
+        const dataTampil = document.getElementById("tabelBarang");
+
+        data.forEach((item) => {
+          const row = dataTampil.insertRow();
+          const data1 = row.insertcell(0);
+          const data2 = row.insertcell(1);
+          const data3 = row.insertcell(2);
+
+          data1 = innerHTML(item.kode);
+          data2 = innerHTML(item.nama_barang);
+          data3 = innerHTML(item.harga);
+        });
+      }
+
+      showData();
+
+      function transaksi() {
+        const kodeBarang = document.getElementById("input-kode").value;
+        const jumlahBarang = parseInt(
+          document.getElementById("input-jumlah").value
+        );
+
+        const adaBarang = data.find((item) => item.kode === kodeBarang);
+
+        if (adaBarang) {
+          const totalHarga = adaBarang.harga * jumlahBarang;
+          alert("Total Pembayaran Adalah : " + totalHarga);
+          const totalBayar = window.prompt("Masukkan Uang User : ");
+          const kembalian = totalBayar - totalHarga;
+
+          if (kembalian >= 0) {
+            alert("kembalian : " + kembalian);
+          } else {
+            alert("Uang Kurang");
+          }
+        } else {
+          alert("Barang Tidak Ada");
+        }
+      }
+    </script>
+  </body>
+</html>
